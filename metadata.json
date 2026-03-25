@@ -1,0 +1,5 @@
+{
+  "name": "Jessica AI Agentic System",
+  "description": "Premium agentic AI platform for intelligent conversation, adaptive memory, and business automation.",
+  "requestFramePermissions": ["camera", "microphone"]
+}

@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and subscription data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email", "description": "User email" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "photoURL": { "type": "string", "description": "User avatar URL" },
+        "role": { "type": "string", "enum": ["user", "admin"], "description": "User role" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation date" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update date" },
+        "subscriptionPlan": { "type": "string", "enum": ["starter", "professional", "enterprise"], "description": "Current plan" },
+        "subscriptionStatus": { "type": "string", "enum": ["active", "canceled", "past_due", "none"], "description": "Subscription status" },
+        "stripeCustomerId": { "type": "string", "description": "Stripe customer ID" },
+        "stripeSubscriptionId": { "type": "string", "description": "Stripe subscription ID" },
+        "currentPeriodEnd": { "type": "string", "format": "date-time", "description": "End of current billing period" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Usage": {
+      "title": "Usage",
+      "description": "Tracking user usage of AI features",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User UID" },
+        "type": { "type": "string", "enum": ["chat", "video"], "description": "Type of usage" },
+        "count": { "type": "integer", "description": "Number of units used" },
+        "date": { "type": "string", "format": "date", "description": "Date of usage" }
+      },
+      "required": ["userId", "type", "count", "date"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "A conversation session with Jessica AI",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "User UID" },
+        "title": { "type": "string", "description": "Session title" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation date" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update date" }
+      },
+      "required": ["userId", "title", "createdAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A single message in a chat session",
+      "type": "object",
+      "properties": {
+        "sessionId": { "type": "string", "description": "Chat session ID" },
+        "role": { "type": "string", "enum": ["user", "assistant"], "description": "Message sender role" },
+        "content": { "type": "string", "description": "Message content" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation date" }
+      },
+      "required": ["sessionId", "role", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/usage/{usageId}": {
+      "schema": "Usage",
+      "description": "Usage tracking"
+    },
+    "/chat_sessions/{sessionId}": {
+      "schema": "ChatSession",
+      "description": "Chat sessions"
+    },
+    "/chat_sessions/{sessionId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Messages within a session"
+    }
+  }
+}
