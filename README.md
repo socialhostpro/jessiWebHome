@@ -3,10 +3,29 @@
 Marketing home page for **Jessi AI**, the on-device personal assistant from
 [Quantum Forge Robotics](https://quantumforgerobotics.com).
 
+## Run it
+
+```bash
+npm start            # serves ./public on http://localhost:3000 (PORT env respected)
+npm run build        # regenerate ./public from ./design (no dependencies)
+```
+
+## Deploy on Railway
+
+1. New Project → Deploy from GitHub repo → pick this repo / branch.
+2. Railway detects Node, runs `npm start` (see `railway.json`). No env vars needed.
+3. Health check: `/healthz`. Add your custom domain under Settings → Networking.
+
+`public/` is committed, so Railway serves it as-is. After editing anything in `design/`,
+run `npm run build` and commit the updated `public/`.
+
 ## Contents
 
 | Path | What it is |
 |---|---|
+| `public/` | **Standalone site** — `index.html`, `logo.html`, `assets/` (deploy this) |
+| `server.js` | Zero-dependency Node static server (security headers, `/healthz`) |
+| `tools/build.mjs` | Builds `public/` from `design/` |
 | `design/Main.dc.html` | Full landing page (Design canvas component source) |
 | `design/Logo.dc.html` | Jessi AI logo explorations (A · Neural J, B · Two Sparks, C · Core Hex) |
 | `design/canvas.json` | Canvas layout index |

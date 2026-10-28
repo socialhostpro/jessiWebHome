@@ -465,7 +465,7 @@ Call Jessi</a>
 <div style="width: 60px; height: 60px; flex: none; border-radius: 16px; background: {{act.col}}; box-shadow: 0 0 34px {{act.glow}}; display: flex; align-items: center; justify-content: center"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#05070D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{act.icon}}"></path></svg></div>
 <div><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: .1em; color: {{act.col}}">{{act.cat}}</div><div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .08em; color: #A8B3C7">{{act.where}}</div></div>
 </div>
-<h3 style="position: relative; margin: 0 0 12px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(34px, 4vw, 52px); line-height: 1; text-transform: uppercase">{{act.name}}</h3>
+<h3 style="position: relative; margin: 0 0 12px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(28px, 3.2vw, 42px); line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere">{{act.name}}</h3>
 <p style="position: relative; margin: 0 0 22px; color: #C9D4E6; font-size: 17px">{{act.body}}</p>
 <div style="position: relative; font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #05070D; border: 1px solid #1B2335; border-radius: 12px; padding: 14px 16px">
 <div style="font-size: 11px; letter-spacing: .1em; color: #8E9AB0; margin-bottom: 6px">YOU SAY</div>
@@ -869,7 +869,7 @@ class Component extends DCLogic {
       var wire = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.OctahedronGeometry(0.4, 0)), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: 0.95, depthWrite: false, blending: ADD }));
       var solid = new THREE.Mesh(new THREE.OctahedronGeometry(0.19, 0), new THREE.MeshBasicMaterial({ color: col }));
       var glow = glowSprite(d.col, 1.7); glow.material.opacity = 0.45;
-      var label = labelSprite(d.name.toUpperCase(), d.col); label.position.y = 0.9; label.material.opacity = 0.55;
+      var label = labelSprite(d.name.toUpperCase(), d.col); label.position.y = 0.85; label.scale.set(1.7, 0.32, 1); label.material.opacity = 0.55;
       var hit = new THREE.Mesh(new THREE.SphereGeometry(0.8, 8, 8), new THREE.MeshBasicMaterial({ visible: false }));
       hit.userData.idx = idx;
       grp.add(wire, solid, glow, label, hit); ring.add(grp);
@@ -1504,7 +1504,7 @@ class Component extends DCLogic {
     var specLabel = labelSprite('JESSI · LISTENING', '#22F2E1', 3.2); specLabel.position.set(0, 1.45, 0); specs.add(specLabel);
 
     // ---- target object being scanned ----
-    var target = new THREE.Group(); target.position.set(4.6, -0.2, 2.4); root.add(target);
+    var target = new THREE.Group(); target.position.set(1.5, -0.4, 2.8); root.add(target);
     var tA = new THREE.LineBasicMaterial({ color: 0xFFB547, transparent: true, opacity: 0.85, depthWrite: false, blending: ADD });
     var tB = new THREE.LineBasicMaterial({ color: 0x22F2E1, transparent: true, opacity: 0.7, depthWrite: false, blending: ADD });
     var part = new THREE.Group(); target.add(part);
@@ -1529,7 +1529,7 @@ class Component extends DCLogic {
     root.add(cone); root.add(coneWire);
 
     // ---- phone (on-device brain) ----
-    var phone = new THREE.Group(); phone.position.set(-4.4, -1.7, -1.2); phone.rotation.set(-0.2, 0.5, 0.08); root.add(phone);
+    var phone = new THREE.Group(); phone.position.set(1.4, -2.7, -0.6); phone.rotation.set(-0.25, -0.35, 0.06); root.add(phone);
     var pmat = new THREE.LineBasicMaterial({ color: 0x8B5CFF, transparent: true, opacity: 0.9, depthWrite: false, blending: ADD });
     phone.add(new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.1, 2.1, 0.12)), pmat));
     var screen = new THREE.Mesh(new THREE.PlaneGeometry(0.96, 1.9), new THREE.MeshBasicMaterial({ color: 0x8B5CFF, transparent: true, opacity: 0.18, depthWrite: false, blending: ADD })); screen.position.z = 0.07; phone.add(screen);
@@ -1560,7 +1560,7 @@ class Component extends DCLogic {
       var wd = c.clientWidth || 1, ht = c.clientHeight || 1;
       renderer.setSize(wd, ht, false); camera.aspect = wd / ht; camera.updateProjectionMatrix();
       wide = wd > 900;
-      if (wide) { root.position.set(3.4, 0.2, 0); root.scale.setScalar(1); camera.position.z = 11; }
+      if (wide) { root.position.set(4.3, 0.4, 0); root.scale.setScalar(0.82); camera.position.z = 11; }
       else { root.position.set(-0.4, -3.4, 0); root.scale.setScalar(0.72); camera.position.z = 15; }
     }
     resize();
@@ -1613,11 +1613,11 @@ class Component extends DCLogic {
       });
       pcore.rotation.y += dt * 1.2; pcore.rotation.x += dt * 0.5;
       pglow.material.opacity = 0.6 + Math.sin(time * 2.4) * 0.25;
-      phone.position.y = -1.7 + Math.sin(time * 1.1 + 1) * 0.12 * idle;
+      phone.position.y = -2.7 + Math.sin(time * 1.1 + 1) * 0.12 * idle;
 
       for (var ri = 0; ri < rings.length; ri++) {
         var rg = rings[ri]; rg.t += dt * 0.7; if (rg.t > 1) rg.t -= 1;
-        var sc = 1 + rg.t * 7; rg.m.scale.set(sc, sc, sc); rg.m.material.opacity = (1 - rg.t) * 0.8;
+        var sc = 1 + rg.t * 4; rg.m.scale.set(sc, sc, sc); rg.m.material.opacity = (1 - rg.t) * 0.7;
       }
       camGlow.material.opacity = 0.7 + Math.sin(time * 6) * 0.3;
       led.material.opacity = Math.sin(time * 4) > 0 ? 1 : 0.2;
