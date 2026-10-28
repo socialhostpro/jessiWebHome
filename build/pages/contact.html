@@ -1,0 +1,41 @@
+<p class="tag">// CONTACT · OPEN CHANNEL</p>
+<h1>Talk to <span class="g">the team.</span></h1>
+<p class="lede">Questions about the beta, a bug, a privacy request, or an idea for a skill? Send it here and a human at Quantum Forge Robotics will reply by email.</p>
+
+<div class="cwrap">
+<form class="cform" id="cform" method="post" action="/api/contact" novalidate>
+<div class="row2">
+<label class="f"><span>NAME</span><input name="name" type="text" autocomplete="name" maxlength="100" required placeholder="Your name"></label>
+<label class="f"><span>EMAIL</span><input name="email" type="email" autocomplete="email" maxlength="200" required placeholder="you@example.com"></label>
+</div>
+<label class="f"><span>TOPIC</span>
+<select name="topic">
+<option>General question</option>
+<option>Beta access</option>
+<option>Bug or support</option>
+<option>Privacy request</option>
+<option>Business or partnerships</option>
+<option>Press</option>
+</select>
+</label>
+<label class="f"><span>MESSAGE</span><textarea name="message" rows="7" maxlength="5000" required placeholder="What's on your mind?"></textarea><em class="count" id="ccount">0 / 5000</em></label>
+<label class="hp" aria-hidden="true">Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+<input type="hidden" name="t" id="ct" value="">
+<p class="fine">By sending this message you agree that we'll use your details to reply, as described in our <a href="/privacy">Privacy Policy</a>.</p>
+<button type="submit" class="send" id="csend"><span class="lbl">SEND MESSAGE</span><span class="arr">→</span></button>
+<p class="status" id="cstatus" role="status" aria-live="polite"></p>
+</form>
+
+<aside class="cside">
+<div class="card"><p class="k">PRIVACY REQUESTS</p><p>Access, export or deletion of your account data. Pick "Privacy request" as the topic, or email <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>.</p></div>
+<div class="card"><p class="k">RESPONSE TIME</p><p>We're a small team in active beta. Expect a reply within a few business days.</p></div>
+<div class="card"><p class="k">THE COMPANY</p><p>Jessi is built by Quantum Forge Robotics. <a href="https://quantumforgerobotics.com" rel="noopener">quantumforgerobotics.com ↗</a></p></div>
+</aside>
+</div>
+
+<div class="done" id="cdone" hidden>
+<div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg></div>
+<h2>Message received.</h2>
+<p>Thanks for reaching out. We'll reply to <strong id="cdone-email">your email</strong> soon.</p>
+<a href="/" class="home">← BACK TO JESSI</a>
+</div>

@@ -1,0 +1,114 @@
+{
+  "no-data-center": {
+    "section": "impact", "accent": "#22F2E1",
+    "title": "No Data Center Needed — Jessi AI",
+    "desc": "Cloud AI runs on racks of GPUs that pull grid power and get cooled with water. Jessi answers your everyday conversations on the chip already in your pocket.",
+    "tag": "[01] // NO DATA CENTER NEEDED", "head": "The greenest data center is", "grad": "the one you never need.",
+    "sub": "Everyday AI on your phone. No server farm spins up to answer you.",
+    "chips": ["0 DATA CENTERS", "SAVES WATER", "SAVES POWER"]
+  },
+  "assistant": {
+    "section": "assistant", "accent": "#8B5CFF",
+    "title": "More Than an Assistant — Jessi AI",
+    "desc": "A hard conversation, a family plan, a late-night idea, a busy workday. Jessi is an on-device AI that's in your corner for your life and your work.",
+    "tag": "[02] // FOR YOUR LIFE · AND YOUR WORK", "head": "More than an assistant.", "grad": "Someone in your corner.",
+    "sub": "Empathetic, grounded and honest. She adapts to you.",
+    "chips": ["TALK IT OUT", "THINK IT THROUGH", "SEE WHAT YOU SEE"]
+  },
+  "call": {
+    "section": "call", "accent": "#22F2E1",
+    "title": "Call Jessi — Talk to Your On-Device AI | Jessi AI",
+    "desc": "Don't type. Just call her. Tap call and talk to Jessi like someone who knows you. She answers in her own voice, and the whole call happens on your phone.",
+    "tag": "[03] // CALL JESSI · LIVE IN THE BETA", "head": "Don't type.", "grad": "Just call her.",
+    "sub": "Her voice is generated on your device. No call audio sent to a data center.",
+    "chips": ["LIVE IN BETA", "ON-DEVICE VOICE", "HANDS FREE"]
+  },
+  "glasses": {
+    "section": "glasses", "accent": "#B79CFF",
+    "title": "Jessi on Meta Glasses — Hands-Free AI | Jessi AI",
+    "desc": "She sees what you see. Pair your Meta glasses and Jessi rides along: look at it, ask about it, and hear her answer in your ear. The thinking happens on your phone.",
+    "tag": "[03.B] // META GLASSES INTEGRATION", "head": "She sees what you see.", "grad": "Hands free.",
+    "sub": "Glasses → phone → ear. Processing stays on-device.",
+    "chips": ["SEE", "SPEAK", "HEAR", "STAY PRIVATE"]
+  },
+  "skills": {
+    "section": "skills", "accent": "#22F2E1",
+    "title": "The Jessi Skill Store — Install New Skills | Jessi AI",
+    "desc": "Give Jessi real expertise on your phone and hands-free on Meta glasses. Install only the skills you need. Every skill keeps the same on-device privacy.",
+    "tag": "[04] // THE JESSI SKILL STORE", "head": "Install new skills.", "grad": "Even on your glasses.",
+    "sub": "Inspector, Mechanic, Kitchen, Translator, Tutor and more.",
+    "chips": ["PHONE", "META GLASSES", "ON-DEVICE"]
+  },
+  "skill-store": {
+    "section": "skillverse", "accent": "#FFB547",
+    "title": "Skills for Every Part of Your Life — Jessi AI",
+    "desc": "Home, work, family and travel. Explore Jessi's skills: Mechanic, Plant Doctor, Kitchen, Translator, Field Tech, Tutor, Shopper and Job Estimator.",
+    "tag": "[04.B] // SKILLVERSE", "head": "Skills for every", "grad": "part of your life.",
+    "sub": "Home · work · family · travel.",
+    "chips": ["HOME", "WORK", "FAMILY", "TRAVEL"]
+  },
+  "adapts": {
+    "section": "adapts", "accent": "#FFB547",
+    "title": "She Starts at 20. She Learns Fast. | Jessi AI",
+    "desc": "Jessi begins as a sharp, curious 20-year-old, and every conversation, correction and thumbs-up teaches her who you are. The longer you talk, the more she becomes your Jessi.",
+    "tag": "[05] // ADAPTS TO YOU", "head": "She starts at 20.", "grad": "She learns fast.",
+    "sub": "Learned on your phone. Stays on your phone.",
+    "chips": ["DAY ONE", "LEARNS YOUR WORLD", "YOUR JESSI"]
+  },
+  "private-by-design": {
+    "section": "privacy", "accent": "#FF3DCB",
+    "title": "Private by Architecture, Not by Promise | Jessi AI",
+    "desc": "Everyday chat and voice run on your phone. Your history, vault and memory stay on your device. Never used for training, and none of your data stored in the cloud.",
+    "tag": "[06] // THIS AI IS YOUR AI", "head": "Private by architecture.", "grad": "Not by promise.",
+    "sub": "The cloud's only job: updates and secure sync routing.",
+    "chips": ["ON-DEVICE", "NEVER IN TRAINING", "ZERO CLOUD STORAGE"]
+  },
+  "origin": {
+    "section": "origin", "accent": "#B79CFF",
+    "title": "Built to Run Robots. Now She Runs With You. | Jessi AI",
+    "desc": "Jessi is the adaptive intelligence behind Quantum Forge Robotics: one mind, five robot bodies. That same intelligence now lives in your pocket.",
+    "tag": "[07] // WHERE JESSI STARTED", "head": "Built to run robots.", "grad": "Now she runs with you.",
+    "sub": "One mind. Five robot bodies. And now, your phone.",
+    "chips": ["QUANTUM FORGE ROBOTICS", "ONE MIND", "FIVE BODIES"]
+  },
+  "features": {
+    "section": "features", "accent": "#22F2E1",
+    "title": "What Jessi Does Today — Live in the Android Beta | Jessi AI",
+    "desc": "Nine capabilities live in the Jessi Android beta right now: on-device chat, calls, sessions, a personal feed, sources, weather, feedback and voice choices.",
+    "tag": "[08] // SHIPPING IN THE BETA", "head": "What Jessi", "grad": "does today.",
+    "sub": "Nine capabilities live in the Android beta.",
+    "chips": ["BETA BUILD", "LIVE NOW", "ANDROID"]
+  },
+  "roadmap": {
+    "section": "next", "accent": "#8B5CFF",
+    "title": "Where Jessi Goes Next — Roadmap | Jessi AI",
+    "desc": "Day Dreaming, connected business tools, read-aloud stories, a memory library, tasks and follow-ups, secure connections and cross-device continuity.",
+    "tag": "[09] // COMING NEXT · LAUNCH SEQUENCE", "head": "Where Jessi", "grad": "goes next.",
+    "sub": "Eight modules queued for launch.",
+    "chips": ["DAY DREAMING", "MCP TOOLS", "MEMORY LIBRARY"]
+  },
+  "beta": {
+    "section": "beta", "accent": "#22F2E1",
+    "title": "Join the Jessi AI Beta — Android Now, iOS Waitlist",
+    "desc": "The intelligence behind our robots. Now yours. Jessi AI is in active beta. Join now and she'll start learning about you. No data center required.",
+    "tag": "> INITIALIZE JESSI_", "head": "The intelligence behind our robots.", "grad": "Now yours.",
+    "sub": "Get the Android beta or join the iOS waitlist.",
+    "chips": ["ANDROID BETA", "iOS WAITLIST", "FREE TO JOIN"]
+  },
+  "join": {
+    "modal": "wl", "accent": "#22F2E1",
+    "title": "Join the Jessi AI Beta — Get on the List",
+    "desc": "Get on the list for the Jessi AI beta. Android is available now and iOS is on the waitlist. On-device AI that keeps your data on your phone.",
+    "tag": "> INITIALIZE JESSI_", "head": "Join the", "grad": "beta.",
+    "sub": "Android beta now. iOS waitlist open.",
+    "chips": ["ANDROID", "iOS", "ON-DEVICE"]
+  },
+  "privacy-promise": {
+    "modal": "pm", "accent": "#FF3DCB",
+    "title": "The Jessi Privacy Promise — Your AI, Your Data",
+    "desc": "Chat and voice run on your phone. Memory and vault stay local. Never used for training. The cloud routes and doesn't store. No selling, no ad tracking.",
+    "tag": "// THE PRIVACY PROMISE", "head": "Your AI.", "grad": "Your data.",
+    "sub": "Six commitments, built into the architecture.",
+    "chips": ["ON-DEVICE", "NEVER TRAINED ON YOU", "NO AD TRACKING"]
+  }
+}

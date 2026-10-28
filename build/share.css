@@ -1,0 +1,35 @@
+/* ---- share widget ---- */
+.jx-share{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-family:'JetBrains Mono',monospace;--acc:#22F2E1;animation:jxShareIn .7s cubic-bezier(.3,1.4,.5,1) 1.6s both}
+@keyframes jxShareIn{from{opacity:0;translate:0 30px;scale:.8}}
+.jx-menu-open .jx-share{opacity:0;pointer-events:none}
+.jx-share-fab{position:relative;display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px 0 16px;border-radius:999px;border:1px solid rgba(34,242,225,.45);background:rgba(6,9,17,.78);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);color:#EAF2FF;font:700 12.5px 'JetBrains Mono',monospace;letter-spacing:.1em;cursor:pointer;box-shadow:0 12px 40px -12px rgba(34,242,225,.5),inset 0 1px 0 rgba(255,255,255,.06);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.jx-share-fab::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--jx-ang,0deg),#22F2E1,#8B5CFF,#FF3DCB,#22F2E1);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.9;animation:jxSpin 4s linear infinite}
+@property --jx-ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes jxSpin{to{--jx-ang:360deg}}
+.jx-share-fab svg{width:20px;height:20px;color:var(--acc);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.jx-share-fab:hover{transform:translateY(-2px);box-shadow:0 16px 50px -10px rgba(34,242,225,.7),inset 0 1px 0 rgba(255,255,255,.08)}
+.jx-share-fab:hover svg{transform:rotate(-20deg) scale(1.1)}
+.jx-share-open .jx-share-fab svg{transform:rotate(180deg)}
+.jx-share-panel{box-sizing:border-box;width:min(340px,calc(100vw - 40px));padding:18px;border-radius:22px;border:1px solid rgba(34,242,225,.25);background:radial-gradient(80% 60% at 100% 0%,rgba(34,242,225,.12),transparent 70%),radial-gradient(80% 60% at 0% 100%,rgba(139,92,255,.16),transparent 70%),rgba(7,10,18,.92);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);box-shadow:0 30px 80px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.03);transform-origin:calc(100% - 40px) 100%;opacity:0;scale:.85;translate:0 16px;visibility:hidden;transition:opacity .25s,scale .35s cubic-bezier(.3,1.4,.5,1),translate .35s cubic-bezier(.3,1.4,.5,1),visibility 0s .35s}
+.jx-share-open .jx-share-panel{opacity:1;scale:1;translate:0 0;visibility:visible;transition:opacity .25s,scale .35s cubic-bezier(.3,1.4,.5,1),translate .35s cubic-bezier(.3,1.4,.5,1),visibility 0s}
+.jx-share-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:14px}
+.jx-share-title{font-family:Unbounded,sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em;color:#EAF2FF}
+.jx-share-sub{font-size:10px;letter-spacing:.08em;color:var(--acc)}
+.jx-share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.jx-sh{display:flex;flex-direction:column;align-items:center;gap:7px;padding:12px 4px 10px;border-radius:14px;border:1px solid #1B2335;background:rgba(10,14,24,.8);color:#C9D4E6;text-decoration:none;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.04em;cursor:pointer;opacity:0;translate:0 10px;transition:opacity .3s,translate .4s cubic-bezier(.2,.8,.2,1),border-color .2s,background .2s,color .2s,box-shadow .2s}
+.jx-sh svg{width:22px;height:22px;transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+a.jx-sh:hover,.jx-sh:hover{color:#EAF2FF;border-color:rgba(34,242,225,.55);background:rgba(34,242,225,.08);box-shadow:0 0 22px rgba(34,242,225,.18)}
+.jx-sh:hover svg{transform:translateY(-2px) scale(1.12)}
+.jx-share-open .jx-sh{opacity:1;translate:0 0}
+.jx-share-open .jx-sh:nth-child(1){transition-delay:.04s}.jx-share-open .jx-sh:nth-child(2){transition-delay:.07s}.jx-share-open .jx-sh:nth-child(3){transition-delay:.1s}.jx-share-open .jx-sh:nth-child(4){transition-delay:.13s}.jx-share-open .jx-sh:nth-child(5){transition-delay:.16s}.jx-share-open .jx-sh:nth-child(6){transition-delay:.19s}.jx-share-open .jx-sh:nth-child(7){transition-delay:.22s}.jx-share-open .jx-sh:nth-child(8){transition-delay:.25s}
+.jx-sh-more{display:none}
+.jx-can-share .jx-sh-more{display:flex}
+.jx-share-copy{display:flex;align-items:center;gap:8px;margin-top:12px;padding:6px 6px 6px 12px;border-radius:12px;border:1px dashed rgba(34,242,225,.3);background:rgba(5,7,13,.7)}
+.jx-share-url{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#8E9AB0}
+.jx-share-copy button{position:relative;flex-shrink:0;border:0;border-radius:9px;padding:9px 12px;background:var(--acc);color:#031513;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.08em;cursor:pointer;transition:background .2s,box-shadow .2s}
+.jx-share-copy button:hover{box-shadow:0 0 20px rgba(34,242,225,.5)}
+.jx-copy-b{display:none}
+.jx-copied .jx-copy-a{display:none}.jx-copied .jx-copy-b{display:inline}
+.jx-copied .jx-share-copy button{background:#7CFFB2}
+@media (max-width:600px){.jx-share{right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.jx-share-fab{height:48px;padding:0 15px}.jx-share-label{display:none}}
+@media (prefers-reduced-motion: reduce){.jx-share,.jx-share-fab::before{animation:none}}

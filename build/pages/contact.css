@@ -1,0 +1,39 @@
+main{max-width:1100px}
+.lede{max-width:640px}
+.cwrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+.cform{position:relative;border:1px solid rgba(34,242,225,.25);background:radial-gradient(70% 50% at 100% 0%,rgba(34,242,225,.08),transparent 70%),rgba(10,14,24,.85);border-radius:24px;padding:28px;box-shadow:0 30px 80px -40px rgba(34,242,225,.35)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{position:relative;display:block;margin:0 0 16px}
+.f span{display:block;margin:0 0 7px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:#A8B3C7}
+.f input,.f select,.f textarea{width:100%;border:1px solid #262E40;background:#05070D;color:var(--ink);border-radius:12px;padding:13px 14px;font:16px/1.5 Inter,sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.f select{background-image:linear-gradient(45deg,transparent 50%,#22F2E1 50%),linear-gradient(135deg,#22F2E1 50%,transparent 50%);background-position:calc(100% - 20px) 54%,calc(100% - 14px) 54%;background-size:6px 6px;background-repeat:no-repeat;padding-right:40px}
+.f textarea{resize:vertical;min-height:160px}
+.f input::placeholder,.f textarea::placeholder{color:#4C5870}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(34,242,225,.15),0 0 24px rgba(34,242,225,.15)}
+.f.bad input,.f.bad textarea{border-color:#FF5C8A;box-shadow:0 0 0 3px rgba(255,92,138,.15)}
+.count{position:absolute;right:12px;bottom:10px;font:500 10px 'JetBrains Mono',monospace;font-style:normal;color:#4C5870}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.fine{margin:4px 0 18px;font-size:13px;color:var(--mute)}
+.send{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;border:0;border-radius:14px;padding:16px 26px;background:var(--acc);color:#031513;font:700 13px 'JetBrains Mono',monospace;letter-spacing:.08em;cursor:pointer;box-shadow:0 0 30px rgba(34,242,225,.35);transition:transform .2s,box-shadow .2s,opacity .2s}
+.send:hover{transform:translateY(-2px);box-shadow:0 0 0 1px #22F2E1,0 0 44px rgba(34,242,225,.6)}
+.send::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{0%,62%{left:-60%}100%{left:130%}}
+.send .arr{transition:transform .2s}.send:hover .arr{transform:translateX(4px)}
+.send[disabled]{opacity:.7;cursor:progress}
+.send[disabled] .arr{animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.status{min-height:1.5em;margin:14px 0 0;font:500 13px 'JetBrains Mono',monospace;color:#FF8AA8}
+.cside{display:flex;flex-direction:column;gap:14px}
+.card{border:1px solid var(--line);background:rgba(10,14,24,.8);border-radius:18px;padding:18px 20px}
+.card p{margin:0;font-size:15px}
+.card .k{margin:0 0 6px;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--acc)}
+.done{text-align:center;border:1px solid rgba(34,242,225,.3);background:radial-gradient(60% 60% at 50% 0%,rgba(34,242,225,.12),transparent 70%),rgba(10,14,24,.85);border-radius:28px;padding:56px 24px;animation:pop .6s cubic-bezier(.3,1.4,.5,1) both}
+.done h2{margin:20px 0 8px;font:800 clamp(26px,4vw,40px) Unbounded,sans-serif;text-transform:uppercase;color:var(--ink)}
+.done p{margin:0 0 28px}
+.ring{width:84px;height:84px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--acc);border:2px solid var(--acc);box-shadow:0 0 0 8px rgba(34,242,225,.08),0 0 40px rgba(34,242,225,.4)}
+.ring svg{width:40px;height:40px;stroke-dasharray:30;stroke-dashoffset:30;animation:draw .6s .3s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(20px)}}
+@media (max-width:860px){.cwrap{grid-template-columns:1fr}}
+@media (max-width:560px){.row2{grid-template-columns:1fr;gap:0}.cform{padding:20px;border-radius:20px}.send{width:100%;justify-content:center}}
+@media (prefers-reduced-motion: reduce){.send::after,.done,.ring svg{animation:none;stroke-dashoffset:0}}

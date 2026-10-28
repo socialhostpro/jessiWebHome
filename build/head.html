@@ -1,0 +1,73 @@
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05070D">
+  <meta name="color-scheme" content="dark">
+  <!-- Paint dark immediately: the runtime scripts below block rendering, and the page's own styles come later. -->
+  <style>html,body{background:#05070D;color:#EAF2FF}</style>
+  <script>
+  // Header behaviour. State lives on <html> so re-renders of the page body never reset it.
+  (function () {
+    var IDS = ['impact', 'assistant', 'call', 'glasses', 'skills', 'skillverse', 'adapts', 'privacy', 'origin', 'features', 'next', 'beta'];
+    var ticking = false;
+    function root() { return document.documentElement; }
+    function setMenu(open) {
+      root().classList.toggle('jx-menu-open', open);
+      var b = document.querySelector('[data-jx-burger]');
+      if (b) { b.setAttribute('aria-expanded', open ? 'true' : 'false'); b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    }
+    function update() {
+      ticking = false;
+      var r = root(), y = window.scrollY || 0;
+      r.classList.toggle('jx-scrolled', y > 24);
+      var max = r.scrollHeight - window.innerHeight;
+      r.style.setProperty('--jx-p', max > 0 ? Math.min(1, y / max).toFixed(4) : '0');
+      var active = '';
+      for (var i = 0; i < IDS.length; i++) {
+        var el = document.getElementById(IDS[i]);
+        if (el && el.getBoundingClientRect().top <= 140) active = IDS[i];
+      }
+      if (r.getAttribute('data-jx-active') !== active) r.setAttribute('data-jx-active', active);
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { if (window.innerWidth > 1000) setMenu(false); onScroll(); });
+    window.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest ? e.target : null;
+      if (!t) return;
+      if (t.closest('[data-jx-burger]')) { setMenu(!root().classList.contains('jx-menu-open')); return; }
+      if (t.closest('[data-jx-menu] a')) setMenu(false);
+    });
+    window.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+    setInterval(update, 1000);
+
+    // Pointer effects: card tilt + spotlight, magnetic buttons, cursor glow. Fine pointers only.
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var tiltEl = null, magEl = null;
+    function clear(el, props) { if (el) props.forEach(function (p) { el.style.removeProperty(p); }); }
+    window.addEventListener('pointermove', function (e) {
+      if (!fine.matches || still.matches) return;
+      var r = root();
+      r.style.setProperty('--cx', e.clientX + 'px');
+      r.style.setProperty('--cy', e.clientY + 'px');
+      var t = e.target && e.target.closest ? e.target : null;
+      var card = t && t.closest('.jx-tilt');
+      if (card !== tiltEl) { clear(tiltEl, ['--rx', '--ry', '--mx', '--my']); tiltEl = card; }
+      if (card) {
+        var b = card.getBoundingClientRect();
+        var x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+        card.style.setProperty('--rx', ((0.5 - y) * 12).toFixed(2) + 'deg');
+        card.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
+        card.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      }
+      var btn = t && t.closest('.jx-btn, .jx-cta');
+      if (btn !== magEl) { clear(magEl, ['--tx', '--ty']); magEl = btn; }
+      if (btn) {
+        var c = btn.getBoundingClientRect();
+        btn.style.setProperty('--tx', ((e.clientX - c.left - c.width / 2) * 0.25).toFixed(1) + 'px');
+        btn.style.setProperty('--ty', ((e.clientY - c.top - c.height / 2) * 0.35).toFixed(1) + 'px');
+      }
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () { root().style.setProperty('--cx', '-999px'); root().style.setProperty('--cy', '-999px'); });
+  })();
+  </script>
