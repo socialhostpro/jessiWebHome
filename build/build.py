@@ -9,6 +9,7 @@ waitlist forms. Then deploy with `railway up` from site/.
 """
 import datetime, io, json, os, re, shutil, sys, zipfile
 from urllib.parse import quote
+from optimize import optimize
 
 # Public address of the site. Change this when a custom domain is attached.
 SITE_URL = 'https://yourjessi.com'
@@ -198,6 +199,7 @@ def main(zip_path):
     if GOOGLE_SITE_VERIFICATION:
         html = html.replace(head, head + '\n  <meta name="google-site-verification" content="%s">' % GOOGLE_SITE_VERIFICATION, 1)
     html = add_sections_jsonld(html)
+    html = optimize(html)
 
     # Static files: icons, share images, manifest, robots and sitemap.
     pub = os.path.join(HERE, 'public')

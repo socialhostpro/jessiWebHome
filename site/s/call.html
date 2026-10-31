@@ -428,10 +428,10 @@
   })();
   </script>
 
-<script src="./vendor/react.js"></script>
-<script src="./vendor/react-dom.js"></script>
-<script src="./support.js"></script>
-<script src="./assets/201b8ee1ca3bce6ea7f7618d80a676d4.js"></script>
+<script defer src="./vendor/react.js"></script>
+<script defer src="./vendor/react-dom.js"></script>
+<script defer src="./support.js"></script>
+<script defer src="./assets/201b8ee1ca3bce6ea7f7618d80a676d4.js"></script>
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "ItemList", "name": "Jessi AI sections", "itemListElement": [{"@type": "SiteNavigationElement", "position": 1, "name": "No Data Center Needed", "description": "Cloud AI runs on racks of GPUs that pull grid power and get cooled with water. Jessi answers your everyday conversations on the chip already in your pocket.", "url": "https://yourjessi.com/#impact"}, {"@type": "SiteNavigationElement", "position": 2, "name": "More Than an Assistant", "description": "A hard conversation, a family plan, a late-night idea, a busy workday. Jessi is an on-device AI that's in your corner for your life and your work.", "url": "https://yourjessi.com/#assistant"}, {"@type": "SiteNavigationElement", "position": 3, "name": "Call Jessi", "description": "Don't type. Just call her. Tap call and talk to Jessi like someone who knows you. She answers in her own voice, and the whole call happens on your phone.", "url": "https://yourjessi.com/#call"}, {"@type": "SiteNavigationElement", "position": 4, "name": "Jessi on Meta Glasses", "description": "She sees what you see. Pair your Meta glasses and Jessi rides along: look at it, ask about it, and hear her answer in your ear. The thinking happens on your phone.", "url": "https://yourjessi.com/#glasses"}, {"@type": "SiteNavigationElement", "position": 5, "name": "The Jessi Skill Store", "description": "Give Jessi real expertise on your phone and hands-free on Meta glasses. Install only the skills you need. Every skill keeps the same on-device privacy.", "url": "https://yourjessi.com/#skills"}, {"@type": "SiteNavigationElement", "position": 6, "name": "Skills for Every Part of Your Life", "description": "Home, work, family and travel. Explore Jessi's skills: Mechanic, Plant Doctor, Kitchen, Translator, Field Tech, Tutor, Shopper and Job Estimator.", "url": "https://yourjessi.com/#skillverse"}, {"@type": "SiteNavigationElement", "position": 7, "name": "She Starts at 20. She Learns Fast.", "description": "Jessi begins as a sharp, curious 20-year-old, and every conversation, correction and thumbs-up teaches her who you are. The longer you talk, the more she becomes your Jessi.", "url": "https://yourjessi.com/#adapts"}, {"@type": "SiteNavigationElement", "position": 8, "name": "Private by Architecture, Not by Promise", "description": "Everyday chat and voice run on your phone. Your history, vault and memory stay on your device. Never used for training, and none of your data stored in the cloud.", "url": "https://yourjessi.com/#privacy"}, {"@type": "SiteNavigationElement", "position": 9, "name": "Built to Run Robots. Now She Runs With You.", "description": "Jessi is the adaptive intelligence behind Quantum Forge Robotics: one mind, five robot bodies. That same intelligence now lives in your pocket.", "url": "https://yourjessi.com/#origin"}, {"@type": "SiteNavigationElement", "position": 10, "name": "What Jessi Does Today", "description": "Nine capabilities live in the Jessi Android beta right now: on-device chat, calls, sessions, a personal feed, sources, weather, feedback and voice choices.", "url": "https://yourjessi.com/#features"}, {"@type": "SiteNavigationElement", "position": 11, "name": "Where Jessi Goes Next", "description": "Day Dreaming, connected business tools, read-aloud stories, a memory library, tasks and follow-ups, secure connections and cross-device continuity.", "url": "https://yourjessi.com/#next"}, {"@type": "SiteNavigationElement", "position": 12, "name": "Join the Jessi AI Beta", "description": "The intelligence behind our robots. Now yours. Jessi AI is in active beta. Join now and she'll start learning about you. No data center required.", "url": "https://yourjessi.com/#beta"}]}
   </script>
@@ -1600,12 +1600,12 @@ class Component extends DCLogic {
     this._gtries = 0;
     this._bootGlass();
     this._botCycle = setInterval(() => {
-      if (Date.now() < (this._botPause || 0)) return;
+      if (!this._sceneNear(this.hangarCanvas) || window.matchMedia('(prefers-reduced-motion: reduce)').matches || Date.now() < (this._botPause || 0)) return;
       var b0 = (this.state && this.state.bot) || 0;
       this.setState({ bot: (b0 + 1) % 5 });
     }, 5200);
     this._cycle = setInterval(() => {
-      if (Date.now() < (this._pauseUntil || 0)) return;
+      if (!this._sceneNear(this.skillCanvas) || window.matchMedia('(prefers-reduced-motion: reduce)').matches || Date.now() < (this._pauseUntil || 0)) return;
       var a = (this.state && this.state.active) || 0;
       this.setState({ active: (a + 1) % 8 });
     }, 4200);
@@ -1628,12 +1628,31 @@ class Component extends DCLogic {
     ];
     return this._sd;
   }
+  _sceneNear(canvas) {
+    if (!canvas || document.hidden) return false;
+    var r = canvas.getBoundingClientRect();
+    return r.bottom > -200 && r.top < window.innerHeight + 200 && r.width > 0;
+  }
+  _deferScene(key, canvas, ready) {
+    if (!canvas || typeof IntersectionObserver === 'undefined') return false;
+    if (this[key + 'Ready']) return false;
+    if (!this[key]) {
+      this[key] = new IntersectionObserver((entries) => {
+        if (!entries.some(e => e.isIntersecting)) return;
+        this[key].disconnect(); this[key] = null; this[key + 'Ready'] = true;
+        ready();
+      }, { rootMargin: '200px' });
+      this[key].observe(canvas);
+    }
+    return true;
+  }
   _bootSkills() {
     if (this._k) return;
     if (!window.THREE || !this.skillCanvas) {
       if (this._ktries++ < 100) this._kretry = setTimeout(() => this._bootSkills(), 100);
       return;
     }
+    if (this._deferScene('_lazySkills', this.skillCanvas, () => this._bootSkills())) return;
     try { this._setupSkills(); } catch (e) { this._k = null; }
   }
   _setupSkills() {
@@ -1803,6 +1822,8 @@ class Component extends DCLogic {
     }
   }
   componentWillUnmount() {
+    ['_lazySkills', '_lazyHangar', '_lazyGlass'].forEach(key => { if (this[key]) this[key].disconnect(); });
+
     clearTimeout(this._retry);
     clearTimeout(this._kretry);
     clearInterval(this._cycle);
@@ -1841,6 +1862,7 @@ class Component extends DCLogic {
     if (!s) return;
     cancelAnimationFrame(s.raf);
     if (s.ro) s.ro.disconnect();
+    if (s.io) s.io.disconnect();
     if (s.host) s.host.removeEventListener('pointermove', s.onMove);
     window.removeEventListener('scroll', s.onScroll);
     s.renderer.dispose();
@@ -1996,6 +2018,7 @@ class Component extends DCLogic {
 
     var grown = 0, last = performance.now(), time = 0;
     function frame(now) {
+      if (s.visible === false) { s.raf = 0; return; }
       if (!reduce && (document.hidden || now - (s.lastPaint || 0) < 33)) { s.raf = requestAnimationFrame(frame); return; }
       s.lastPaint = now;
       var dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
@@ -2024,6 +2047,13 @@ class Component extends DCLogic {
       camera.lookAt(wide ? 1.2 : 0, scrollT * 0.8, 0);
       renderer.render(scene, camera);
       if (!reduce) s.raf = requestAnimationFrame(frame);
+    }
+    if (typeof IntersectionObserver !== 'undefined') {
+      s.io = new IntersectionObserver(entries => {
+        s.visible = entries[0].isIntersecting;
+        if (s.visible && !s.raf && !reduce) { last = performance.now(); s.raf = requestAnimationFrame(frame); }
+      });
+      s.io.observe(c);
     }
     if (reduce) { grown = L; frame(performance.now()); } else s.raf = requestAnimationFrame(frame);
   }
@@ -2060,6 +2090,7 @@ class Component extends DCLogic {
       if (this._htries++ < 100) this._hretry = setTimeout(() => this._bootHangar(), 100);
       return;
     }
+    if (this._deferScene('_lazyHangar', this.hangarCanvas, () => this._bootHangar())) return;
     try { this._setupHangar(); } catch (e) { this._h = null; }
   }
   _setupHangar() {
@@ -2262,6 +2293,7 @@ class Component extends DCLogic {
       if (this._gtries++ < 100) this._gretry = setTimeout(() => this._bootGlass(), 100);
       return;
     }
+    if (this._deferScene('_lazyGlass', this.glassCanvas, () => this._bootGlass())) return;
     try { this._setupGlass(); } catch (e) { this._g = null; }
   }
   _setupGlass() {
