@@ -247,6 +247,14 @@ async function handleContact(req, res) {
 }
 
 http.createServer((req, res) => {
+  // Redirect public alias hosts; leave loopback/health checks and POST forms alone.
+  const host = (req.headers.host || '').split(':')[0].toLowerCase();
+  if ((req.method === 'GET' || req.method === 'HEAD') &&
+      ['www.yourjessi.com', 'jessi-ai-home-production.up.railway.app'].includes(host) &&
+      (req.url || '/').split('?')[0] !== '/healthz') {
+    res.writeHead(301, baseHeaders({ Location: 'https://yourjessi.com' + req.url }));
+    return res.end();
+  }
   const urlPath = (req.url || '/').split('?')[0];
   const api = { '/api/contact': handleContact, '/api/waitlist': handleWaitlist }[urlPath];
   if (api) {

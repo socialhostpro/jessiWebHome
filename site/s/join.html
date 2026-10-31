@@ -7,7 +7,7 @@
   <meta name="keywords" content="on-device AI, private AI assistant, Android AI assistant, offline AI, AI without data center, Meta glasses AI, Jessi AI, Quantum Forge Robotics">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="Quantum Forge Robotics">
-  <link rel="canonical" href="https://jessi-ai-home-production.up.railway.app/">
+  <link rel="canonical" href="https://yourjessi.com/">
 
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -17,11 +17,11 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Jessi AI">
   <meta property="og:locale" content="en_US">
-  <meta property="og:url" content="https://jessi-ai-home-production.up.railway.app/join">
+  <meta property="og:url" content="https://yourjessi.com/join">
   <meta property="og:title" content="Join the Jessi AI Beta — Get on the List">
   <meta property="og:description" content="Get on the list for the Jessi AI beta. Android is available now and iOS is on the waitlist. On-device AI that keeps your data on your phone.">
-  <meta property="og:image" content="https://jessi-ai-home-production.up.railway.app/share/join.jpg">
-  <meta property="og:image:secure_url" content="https://jessi-ai-home-production.up.railway.app/share/join.jpg">
+  <meta property="og:image" content="https://yourjessi.com/share/join.jpg">
+  <meta property="og:image:secure_url" content="https://yourjessi.com/share/join.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -30,7 +30,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Join the Jessi AI Beta — Get on the List">
   <meta name="twitter:description" content="Get on the list for the Jessi AI beta. Android is available now and iOS is on the waitlist. On-device AI that keeps your data on your phone.">
-  <meta name="twitter:image" content="https://jessi-ai-home-production.up.railway.app/share/join.jpg">
+  <meta name="twitter:image" content="https://yourjessi.com/share/join.jpg">
   <meta name="twitter:image:alt" content="Join the beta.">
 
   <script type="application/ld+json">
@@ -45,31 +45,31 @@
       },
       {
         "@type": "WebSite",
-        "@id": "https://jessi-ai-home-production.up.railway.app/#website",
-        "url": "https://jessi-ai-home-production.up.railway.app/",
+        "@id": "https://yourjessi.com/#website",
+        "url": "https://yourjessi.com/",
         "name": "Jessi AI",
         "inLanguage": "en",
         "publisher": { "@id": "https://quantumforgerobotics.com/#org" }
       },
       {
         "@type": "WebPage",
-        "@id": "https://jessi-ai-home-production.up.railway.app/#webpage",
-        "url": "https://jessi-ai-home-production.up.railway.app/",
+        "@id": "https://yourjessi.com/#webpage",
+        "url": "https://yourjessi.com/",
         "name": "Jessi AI — On-Device AI Assistant for Android",
-        "isPartOf": { "@id": "https://jessi-ai-home-production.up.railway.app/#website" },
-        "about": { "@id": "https://jessi-ai-home-production.up.railway.app/#app" },
-        "primaryImageOfPage": "https://jessi-ai-home-production.up.railway.app/og-image.jpg",
+        "isPartOf": { "@id": "https://yourjessi.com/#website" },
+        "about": { "@id": "https://yourjessi.com/#app" },
+        "primaryImageOfPage": "https://yourjessi.com/og-image.jpg",
         "inLanguage": "en"
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://jessi-ai-home-production.up.railway.app/#app",
+        "@id": "https://yourjessi.com/#app",
         "name": "Jessi AI",
         "applicationCategory": "LifestyleApplication",
         "operatingSystem": "Android",
-        "description": "An on-device AI assistant that runs on your phone instead of a data center. Your data stays on your device. Voice calls, installable skills and Meta glasses support.",
-        "image": "https://jessi-ai-home-production.up.railway.app/og-image.jpg",
-        "url": "https://jessi-ai-home-production.up.railway.app/",
+        "description": "An on-device AI assistant that runs on your phone instead of a data center. Everyday chat stays on your device. Voice calls, installable skills and Meta glasses support.",
+        "image": "https://yourjessi.com/og-image.jpg",
+        "url": "https://yourjessi.com/",
         "publisher": { "@id": "https://quantumforgerobotics.com/#org" },
         "featureList": [
           "Runs on-device — no data center",
@@ -121,7 +121,8 @@
       if (t.closest('[data-jx-menu] a')) setMenu(false);
     });
     window.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
-    setInterval(update, 1000);
+    document.addEventListener('DOMContentLoaded', onScroll, { once: true });
+    window.addEventListener('load', onScroll, { once: true });
 
     // Pointer effects: card tilt + spotlight, magnetic buttons, cursor glow. Fine pointers only.
     var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -347,7 +348,7 @@
       var el = document.getElementById(id);
       if (!el) return false;
       lockUntil = Date.now() + (smooth ? 1200 : 400);
-      el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+      el.scrollIntoView({ behavior: smooth && !window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto', block: 'start' });
       current = id;
       return true;
     }
@@ -393,7 +394,7 @@
       if (!a || a.target) return;
       var href = a.getAttribute('href');
       var s = href.replace(/^\/+|\/+$/g, '');
-      if (href === '/') { e.preventDefault(); lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: 'smooth' }); current = ''; setPath('/', true); return; }
+      if (href === '/') { e.preventDefault(); lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); current = ''; setPath('/', true); return; }
       if (href.charAt(0) !== '/' || !ROUTES[s]) return;
       e.preventDefault();
       if (scrollToId(ROUTES[s], true)) setPath('/' + s, true);
@@ -403,7 +404,7 @@
     window.addEventListener('popstate', function () {
       var id = ROUTES[slug()];
       if (id) scrollToId(id, true);
-      else if (!slug()) { lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: 'smooth' }); current = ''; }
+      else if (!slug()) { lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); current = ''; }
     });
 
     // Scrolling updates the address bar to the section in view (replace, so history isn't flooded).
@@ -427,12 +428,12 @@
   })();
   </script>
 
-<script src="./vendor/react.js"></script>
-<script src="./vendor/react-dom.js"></script>
-<script src="./support.js"></script>
-<script src="./assets/201b8ee1ca3bce6ea7f7618d80a676d4.js"></script>
+<script defer src="./vendor/react.js"></script>
+<script defer src="./vendor/react-dom.js"></script>
+<script defer src="./support.js"></script>
+<script defer src="./assets/201b8ee1ca3bce6ea7f7618d80a676d4.js"></script>
   <script type="application/ld+json">
-  {"@context": "https://schema.org", "@type": "ItemList", "name": "Jessi AI sections", "itemListElement": [{"@type": "SiteNavigationElement", "position": 1, "name": "No Data Center Needed", "description": "Cloud AI runs on racks of GPUs that pull grid power and get cooled with water. Jessi answers your everyday conversations on the chip already in your pocket.", "url": "https://jessi-ai-home-production.up.railway.app/no-data-center"}, {"@type": "SiteNavigationElement", "position": 2, "name": "More Than an Assistant", "description": "A hard conversation, a family plan, a late-night idea, a busy workday. Jessi is an on-device AI that's in your corner for your life and your work.", "url": "https://jessi-ai-home-production.up.railway.app/assistant"}, {"@type": "SiteNavigationElement", "position": 3, "name": "Call Jessi", "description": "Don't type. Just call her. Tap call and talk to Jessi like someone who knows you. She answers in her own voice, and the whole call happens on your phone.", "url": "https://jessi-ai-home-production.up.railway.app/call"}, {"@type": "SiteNavigationElement", "position": 4, "name": "Jessi on Meta Glasses", "description": "She sees what you see. Pair your Meta glasses and Jessi rides along: look at it, ask about it, and hear her answer in your ear. The thinking happens on your phone.", "url": "https://jessi-ai-home-production.up.railway.app/glasses"}, {"@type": "SiteNavigationElement", "position": 5, "name": "The Jessi Skill Store", "description": "Give Jessi real expertise on your phone and hands-free on Meta glasses. Install only the skills you need. Every skill keeps the same on-device privacy.", "url": "https://jessi-ai-home-production.up.railway.app/skills"}, {"@type": "SiteNavigationElement", "position": 6, "name": "Skills for Every Part of Your Life", "description": "Home, work, family and travel. Explore Jessi's skills: Mechanic, Plant Doctor, Kitchen, Translator, Field Tech, Tutor, Shopper and Job Estimator.", "url": "https://jessi-ai-home-production.up.railway.app/skill-store"}, {"@type": "SiteNavigationElement", "position": 7, "name": "She Starts at 20. She Learns Fast.", "description": "Jessi begins as a sharp, curious 20-year-old, and every conversation, correction and thumbs-up teaches her who you are. The longer you talk, the more she becomes your Jessi.", "url": "https://jessi-ai-home-production.up.railway.app/adapts"}, {"@type": "SiteNavigationElement", "position": 8, "name": "Private by Architecture, Not by Promise", "description": "Everyday chat and voice run on your phone. Your history, vault and memory stay on your device. Never used for training, and none of your data stored in the cloud.", "url": "https://jessi-ai-home-production.up.railway.app/private-by-design"}, {"@type": "SiteNavigationElement", "position": 9, "name": "Built to Run Robots. Now She Runs With You.", "description": "Jessi is the adaptive intelligence behind Quantum Forge Robotics: one mind, five robot bodies. That same intelligence now lives in your pocket.", "url": "https://jessi-ai-home-production.up.railway.app/origin"}, {"@type": "SiteNavigationElement", "position": 10, "name": "What Jessi Does Today", "description": "Nine capabilities live in the Jessi Android beta right now: on-device chat, calls, sessions, a personal feed, sources, weather, feedback and voice choices.", "url": "https://jessi-ai-home-production.up.railway.app/features"}, {"@type": "SiteNavigationElement", "position": 11, "name": "Where Jessi Goes Next", "description": "Day Dreaming, connected business tools, read-aloud stories, a memory library, tasks and follow-ups, secure connections and cross-device continuity.", "url": "https://jessi-ai-home-production.up.railway.app/roadmap"}, {"@type": "SiteNavigationElement", "position": 12, "name": "Join the Jessi AI Beta", "description": "The intelligence behind our robots. Now yours. Jessi AI is in active beta. Join now and she'll start learning about you. No data center required.", "url": "https://jessi-ai-home-production.up.railway.app/beta"}]}
+  {"@context": "https://schema.org", "@type": "ItemList", "name": "Jessi AI sections", "itemListElement": [{"@type": "SiteNavigationElement", "position": 1, "name": "No Data Center Needed", "description": "Cloud AI runs on racks of GPUs that pull grid power and get cooled with water. Jessi answers your everyday conversations on the chip already in your pocket.", "url": "https://yourjessi.com/#impact"}, {"@type": "SiteNavigationElement", "position": 2, "name": "More Than an Assistant", "description": "A hard conversation, a family plan, a late-night idea, a busy workday. Jessi is an on-device AI that's in your corner for your life and your work.", "url": "https://yourjessi.com/#assistant"}, {"@type": "SiteNavigationElement", "position": 3, "name": "Call Jessi", "description": "Don't type. Just call her. Tap call and talk to Jessi like someone who knows you. She answers in her own voice, and the whole call happens on your phone.", "url": "https://yourjessi.com/#call"}, {"@type": "SiteNavigationElement", "position": 4, "name": "Jessi on Meta Glasses", "description": "She sees what you see. Pair your Meta glasses and Jessi rides along: look at it, ask about it, and hear her answer in your ear. The thinking happens on your phone.", "url": "https://yourjessi.com/#glasses"}, {"@type": "SiteNavigationElement", "position": 5, "name": "The Jessi Skill Store", "description": "Give Jessi real expertise on your phone and hands-free on Meta glasses. Install only the skills you need. Every skill keeps the same on-device privacy.", "url": "https://yourjessi.com/#skills"}, {"@type": "SiteNavigationElement", "position": 6, "name": "Skills for Every Part of Your Life", "description": "Home, work, family and travel. Explore Jessi's skills: Mechanic, Plant Doctor, Kitchen, Translator, Field Tech, Tutor, Shopper and Job Estimator.", "url": "https://yourjessi.com/#skillverse"}, {"@type": "SiteNavigationElement", "position": 7, "name": "She Starts at 20. She Learns Fast.", "description": "Jessi begins as a sharp, curious 20-year-old, and every conversation, correction and thumbs-up teaches her who you are. The longer you talk, the more she becomes your Jessi.", "url": "https://yourjessi.com/#adapts"}, {"@type": "SiteNavigationElement", "position": 8, "name": "Private by Architecture, Not by Promise", "description": "Everyday chat and voice run on your phone. Your history, vault and memory stay on your device. Never used for training, and none of your data stored in the cloud.", "url": "https://yourjessi.com/#privacy"}, {"@type": "SiteNavigationElement", "position": 9, "name": "Built to Run Robots. Now She Runs With You.", "description": "Jessi is the adaptive intelligence behind Quantum Forge Robotics: one mind, five robot bodies. That same intelligence now lives in your pocket.", "url": "https://yourjessi.com/#origin"}, {"@type": "SiteNavigationElement", "position": 10, "name": "What Jessi Does Today", "description": "Nine capabilities live in the Jessi Android beta right now: on-device chat, calls, sessions, a personal feed, sources, weather, feedback and voice choices.", "url": "https://yourjessi.com/#features"}, {"@type": "SiteNavigationElement", "position": 11, "name": "Where Jessi Goes Next", "description": "Day Dreaming, connected business tools, read-aloud stories, a memory library, tasks and follow-ups, secure connections and cross-device continuity.", "url": "https://yourjessi.com/#next"}, {"@type": "SiteNavigationElement", "position": 12, "name": "Join the Jessi AI Beta", "description": "The intelligence behind our robots. Now yours. Jessi AI is in active beta. Join now and she'll start learning about you. No data center required.", "url": "https://yourjessi.com/#beta"}]}
   </script>
 </head>
 <body>
@@ -794,6 +795,20 @@ a.jx-pm-beta:hover{color:#EAF2FF;transform:translateY(-2px)}
 .jx-term-foot span:first-child{color:#22F2E1}
 @media (max-width:980px){.jx-og{grid-template-columns:1fr;gap:36px;padding-top:88px}.jx-og-h{font-size:clamp(30px,6vw,48px)}}
 @media (max-width:560px){.jx-og-logo img{width:96px;height:96px}.jx-term-body{padding:16px 16px 6px}.jx-term-line{grid-template-columns:auto minmax(0,1fr);row-gap:8px}.jx-term-ts{display:none}.jx-term-line p{grid-column:1/-1;font-size:14.5px}.jx-term-foot{padding:10px 16px}}
+/* Keep content immediately visible; retain the static visual design. */
+#top>div[style*="z-index: 2"]>div>*,
+#top>div[style*="z-index: 2"]>div>:nth-child(6)>*{animation:none!important}
+/* Background-position, filters and animated large glows repaint continuously. */
+.jx-grad,.jx-floor,.jx-scan,.jx-hdr::after,.jx-cta::after,
+section div[aria-hidden][style*="filter: blur(9"],
+section div[aria-hidden][style*="filter: blur(100px)"]{animation:none!important}
+@supports (animation-timeline:view()){
+section:not(#top) :is(h2,p,article,.jx-tilt,li,a.jx-btn){animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.jx-tilt:hover{transform:none!important}
+}
 </style>
 </helmet>
 <div style="background: #05070D; color: #EAF2FF; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100vh; overflow-x: clip">
@@ -841,17 +856,17 @@ a.jx-pm-beta:hover{color:#EAF2FF;transform:translateY(-2px)}
 <div class="jx-share-panel" role="dialog" aria-label="Share Jessi AI" id="jx-share-panel">
 <div class="jx-share-head"><span class="jx-share-title">SHARE JESSI</span><span class="jx-share-sub">// no data center needed</span></div>
 <div class="jx-share-grid">
-<a class="jx-sh" data-jx-pop href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F&amp;text=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed" target="_blank" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9zm-1.3 19.4h2L6.5 3.2H4.3z"/></svg><span>X</span></a>
-<a class="jx-sh" data-jx-pop href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 8.6V6.8c0-.8.5-1 1-1h2.6V2.1L14.2 2C10.8 2 10 4.5 10 6.2v2.4H7.6v3.8H10V22h4v-9.6h3.1l.5-3.8z"/></svg><span>Facebook</span></a>
-<a class="jx-sh" data-jx-pop href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.5 8.5h4V21h-4zM5.5 2.5a2.3 2.3 0 1 1 0 4.6 2.3 2.3 0 0 1 0-4.6zM10 8.5h3.8v1.8c.6-1 2-2.1 4-2.1 4.1 0 4.7 2.6 4.7 6V21h-4v-5.9c0-1.4 0-3.2-2-3.2s-2.4 1.5-2.4 3.1v6H10z"/></svg><span>LinkedIn</span></a>
-<a class="jx-sh" data-jx-pop href="https://www.reddit.com/submit?url=https%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F&amp;title=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed" target="_blank" rel="noopener" aria-label="Share on Reddit"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="14.5" rx="8.5" ry="6"/><circle cx="18.5" cy="4.5" r="1.6"/><path d="M12 8.5 13.2 3l5.3 1.5"/><circle cx="8.8" cy="13.6" r="1" fill="currentColor"/><circle cx="15.2" cy="13.6" r="1" fill="currentColor"/><path d="M9 17c1.8 1.2 4.2 1.2 6 0"/></svg><span>Reddit</span></a>
-<a class="jx-sh" data-jx-pop href="https://wa.me/?text=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed%20https%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3 3z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8a5 5 0 0 1-2.7-2.7l.8-1-1-2z" fill="currentColor" stroke-width="1"/></svg><span>WhatsApp</span></a>
-<a class="jx-sh" data-jx-pop href="https://t.me/share/url?url=https%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F&amp;text=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed" target="_blank" rel="noopener" aria-label="Share on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21.5 3.5 2.5 11l6.5 2.4L18 7l-6.8 7.6.3 6.4 3.4-4.3 4.6 3.3z"/></svg><span>Telegram</span></a>
-<a class="jx-sh" href="mailto:?subject=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed&amp;body=Jessi%20is%20an%20on-device%20AI%20assistant%20that%20thinks%20on%20your%20phone%2C%20not%20in%20a%20data%20center.%0A%0Ahttps%3A%2F%2Fjessi-ai-home-production.up.railway.app%2F" aria-label="Share by email"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg><span>Email</span></a>
+<a class="jx-sh" data-jx-pop href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fyourjessi.com%2F&amp;text=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed" target="_blank" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9zm-1.3 19.4h2L6.5 3.2H4.3z"/></svg><span>X</span></a>
+<a class="jx-sh" data-jx-pop href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyourjessi.com%2F" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 8.6V6.8c0-.8.5-1 1-1h2.6V2.1L14.2 2C10.8 2 10 4.5 10 6.2v2.4H7.6v3.8H10V22h4v-9.6h3.1l.5-3.8z"/></svg><span>Facebook</span></a>
+<a class="jx-sh" data-jx-pop href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fyourjessi.com%2F" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.5 8.5h4V21h-4zM5.5 2.5a2.3 2.3 0 1 1 0 4.6 2.3 2.3 0 0 1 0-4.6zM10 8.5h3.8v1.8c.6-1 2-2.1 4-2.1 4.1 0 4.7 2.6 4.7 6V21h-4v-5.9c0-1.4 0-3.2-2-3.2s-2.4 1.5-2.4 3.1v6H10z"/></svg><span>LinkedIn</span></a>
+<a class="jx-sh" data-jx-pop href="https://www.reddit.com/submit?url=https%3A%2F%2Fyourjessi.com%2F&amp;title=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed" target="_blank" rel="noopener" aria-label="Share on Reddit"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><ellipse cx="12" cy="14.5" rx="8.5" ry="6"/><circle cx="18.5" cy="4.5" r="1.6"/><path d="M12 8.5 13.2 3l5.3 1.5"/><circle cx="8.8" cy="13.6" r="1" fill="currentColor"/><circle cx="15.2" cy="13.6" r="1" fill="currentColor"/><path d="M9 17c1.8 1.2 4.2 1.2 6 0"/></svg><span>Reddit</span></a>
+<a class="jx-sh" data-jx-pop href="https://wa.me/?text=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed%20https%3A%2F%2Fyourjessi.com%2F" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3 3z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8a5 5 0 0 1-2.7-2.7l.8-1-1-2z" fill="currentColor" stroke-width="1"/></svg><span>WhatsApp</span></a>
+<a class="jx-sh" data-jx-pop href="https://t.me/share/url?url=https%3A%2F%2Fyourjessi.com%2F&amp;text=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed" target="_blank" rel="noopener" aria-label="Share on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21.5 3.5 2.5 11l6.5 2.4L18 7l-6.8 7.6.3 6.4 3.4-4.3 4.6 3.3z"/></svg><span>Telegram</span></a>
+<a class="jx-sh" href="mailto:?subject=Jessi%20AI%20%E2%80%94%20No%20data%20center%20needed&amp;body=Jessi%20is%20an%20on-device%20AI%20assistant%20that%20thinks%20on%20your%20phone%2C%20not%20in%20a%20data%20center.%0A%0Ahttps%3A%2F%2Fyourjessi.com%2F" aria-label="Share by email"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3 6.5 9 6.5 9-6.5"/></svg><span>Email</span></a>
 <button type="button" class="jx-sh jx-sh-more" data-jx-native aria-label="More sharing options"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>More</span></button>
 </div>
 <div class="jx-share-copy">
-<span class="jx-share-url">jessi-ai-home-production.up.railway.app</span>
+<span class="jx-share-url">yourjessi.com</span>
 <button type="button" data-jx-copy><span class="jx-copy-a">COPY LINK</span><span class="jx-copy-b">COPIED ✓</span></button>
 </div>
 </div>
@@ -866,7 +881,7 @@ a.jx-pm-beta:hover{color:#EAF2FF;transform:translateY(-2px)}
 <button type="button" class="jx-pm-x" data-jx-pm-close aria-label="Close"><span></span><span></span></button>
 <p class="jx-pm-tag">// THE PRIVACY PROMISE</p>
 <h2 id="jx-pm-title" class="jx-pm-h">Your AI. <span class="jx-grad">Your data.</span></h2>
-<p class="jx-pm-lede">Jessi is private by architecture, not by promise. Here's exactly what that means.</p>
+<p class="jx-pm-lede">Jessi is private by architecture, not by promise. Everyday chat stays on-device. Account, waitlist and contact details are handled as described in our privacy policy.</p>
 <ol class="jx-pm-list">
 <li><b>01</b><div><strong>Everyday chat and voice run on your phone.</strong> Your conversations are processed on-device, not on our servers.</div></li>
 <li><b>02</b><div><strong>Your history, vault and memory stay local.</strong> What Jessi learns about you lives on your device, and only you can delete it.</div></li>
@@ -881,7 +896,7 @@ a.jx-pm-beta:hover{color:#EAF2FF;transform:translateY(-2px)}
 <p><span>chat + voice</span><em class="c">ON_DEVICE</em></p>
 <p><span>memory + vault</span><em class="c">LOCAL</em></p>
 <p><span>personal data in training</span><em class="m">NEVER</em></p>
-<p><span>cloud storage of your data</span><em class="m">NONE</em></p>
+<p><span>cloud storage of everyday chat</span><em class="m">NONE</em></p>
 </div>
 </div>
 <div class="jx-pm-actions">
@@ -900,7 +915,7 @@ a.jx-pm-beta:hover{color:#EAF2FF;transform:translateY(-2px)}
 <p class="jx-pm-lede">Get on the list and we'll email you when your spot opens. No data center required.</p>
 <form class="jx-wl-form" data-jx-wl-form novalidate>
 <div class="jx-wl-plat" role="radiogroup" aria-label="Platform">
-<label><input type="radio" name="platform" value="Android" checked><span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>ANDROID BETA<em>Available now</em></span></label>
+<label><input type="radio" name="platform" value="Android" checked><span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>ANDROID BETA<em>Invitations by email</em></span></label>
 <label><input type="radio" name="platform" value="iOS"><span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4"/></svg>iOS WAITLIST<em>Coming soon</em></span></label>
 </div>
 <div class="jx-wl-row">
@@ -945,11 +960,11 @@ a.jx-pm-beta:hover{color:#EAF2FF;transform:translateY(-2px)}
 </div>
 <p style="margin: 0 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 15px; letter-spacing: .14em; color: #A8B3C7">YOUR AI. YOUR PHONE. YOUR DATA.</p>
 <h1 style="margin: 0 0 28px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(46px, 7.4vw, 104px); line-height: .95; letter-spacing: -0.02em; text-transform: uppercase">No data center<br><span class="jx-grad">needed.</span></h1>
-<p style="margin: 0 0 36px; max-width: 560px; font-size: 19px; color: #C9D4E6">Jessi thinks on the phone in your hand — not in a warehouse full of servers. Your data stays on your device. No cooling water. No grid-scale power. And she adapts to you, learning fast from the day you meet.</p>
+<p style="margin: 0 0 36px; max-width: 560px; font-size: 19px; color: #C9D4E6">Jessi thinks on the phone in your hand — not in a warehouse full of servers. Everyday chat stays on your device. No cooling water. No grid-scale power. And she adapts to you, learning fast from the day you meet.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 44px">
 <a href="#beta" class="jx-btn" style="display: inline-flex; align-items: center; gap: 10px; background: {{accent}}; color: #031513; text-decoration: none; font-weight: 700; padding: 16px 24px; border-radius: 12px; box-shadow: 0 0 30px rgba(34,242,225,.35)">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"></rect><path d="M11 18h2"></path></svg>
-Get the Android beta</a>
+Join the Android beta waitlist</a>
 <a href="/call" class="jx-btn" style="display: inline-flex; align-items: center; gap: 10px; border: 1px solid #3A2A6E; background: rgba(139,92,255,.12); color: #EAF2FF; text-decoration: none; font-weight: 600; padding: 16px 24px; border-radius: 12px">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B79CFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
 Call Jessi</a>
@@ -1002,8 +1017,6 @@ Call Jessi</a>
 </article>
 </div>
 <div style="margin-top: 20px; border: 1px dashed #2A3550; border-radius: 16px; padding: 18px 24px; display: flex; flex-wrap: wrap; gap: 12px 32px; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A8B3C7">
-<span>WATER/CHAT · <span style="color: #EAF2FF">[MEASURED FIGURE]</span></span>
-<span>ENERGY/CHAT · <span style="color: #EAF2FF">[MEASURED FIGURE]</span></span>
 <span>CLOUD CALLS FOR EVERYDAY CHAT · <span style="color: {{accent}}">0</span></span>
 </div>
 <p style="margin: 14px 0 0; font-size: 13px; color: #8E9AB0">Online features — news feed, weather, connected services — use the internet when you open them.</p>
@@ -1120,7 +1133,7 @@ Call Jessi</a>
 <li style="border: 1px solid #1B2335; background: rgba(10,14,24,.85); border-radius: 12px; padding: 14px 16px; font-size: 15px"><span style="font-family: 'JetBrains Mono', monospace; color: {{accent}}">03 ·</span> No call audio sent to a data center</li>
 <li style="border: 1px solid #1B2335; background: rgba(10,14,24,.85); border-radius: 12px; padding: 14px 16px; font-size: 15px"><span style="font-family: 'JetBrains Mono', monospace; color: {{accent}}">04 ·</span> Picks up where your session left off</li>
 </ul>
-<a href="#beta" class="jx-btn" style="display: inline-flex; align-items: center; gap: 10px; background: {{accent}}; color: #031513; text-decoration: none; font-weight: 700; padding: 16px 24px; border-radius: 12px; box-shadow: 0 0 30px rgba(34,242,225,.35)">Get the beta &amp; call Jessi →</a>
+<a href="#beta" class="jx-btn" style="display: inline-flex; align-items: center; gap: 10px; background: {{accent}}; color: #031513; text-decoration: none; font-weight: 700; padding: 16px 24px; border-radius: 12px; box-shadow: 0 0 30px rgba(34,242,225,.35)">Join the beta waitlist →</a>
 </div>
 </div>
 </section>
@@ -1202,7 +1215,7 @@ Call Jessi</a>
 <a href="/call" class="jx-btn" style="text-align: center; border: 1px solid rgba(234,242,255,.35); background: rgba(5,7,13,.55); color: #EAF2FF; text-decoration: none; font-weight: 700; font-size: 16px; padding: 16px 26px; border-radius: 16px">How calling Jessi works</a>
 </div>
 </div>
-<p style="margin: 18px 0 0; font-size: 12px; color: #8E9AB0">Supported glasses models: [MODEL LIST]. Meta is a trademark of Meta Platforms, Inc. Jessi AI is not affiliated with or endorsed by Meta.</p>
+<p style="margin: 18px 0 0; font-size: 12px; color: #8E9AB0">Meta is a trademark of Meta Platforms, Inc. Jessi AI is not affiliated with or endorsed by Meta.</p>
 </div>
 </section>
 
@@ -1369,7 +1382,7 @@ Call Jessi</a>
 <div class="jx-rv" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 0 auto 56px; max-width: 1100px; text-align: left">
 <div style="border: 1px solid rgba(34,242,225,.4); background: rgba(10,14,24,.9); border-radius: 22px; padding: 28px; box-shadow: 0 0 50px rgba(34,242,225,.12)"><div style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 3.4vw, 44px); line-height: 1; color: {{accent}}">ON-DEVICE</div><div style="margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .06em; color: #C9D4E6">EVERYDAY CHAT, VOICE &amp; MEMORY</div></div>
 <div style="border: 1px solid rgba(255,61,203,.45); background: rgba(10,14,24,.9); border-radius: 22px; padding: 28px; box-shadow: 0 0 50px rgba(255,61,203,.12)"><div style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 3.4vw, 44px); line-height: 1; color: #FF3DCB">NEVER</div><div style="margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .06em; color: #C9D4E6">PERSONAL DATA IN TRAINING</div></div>
-<div style="border: 1px solid rgba(139,92,255,.5); background: rgba(10,14,24,.9); border-radius: 22px; padding: 28px; box-shadow: 0 0 50px rgba(139,92,255,.14)"><div style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 3.4vw, 44px); line-height: 1; color: #B79CFF">ZERO</div><div style="margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .06em; color: #C9D4E6">OF YOUR DATA STORED IN THE CLOUD</div></div>
+<div style="border: 1px solid rgba(139,92,255,.5); background: rgba(10,14,24,.9); border-radius: 22px; padding: 28px; box-shadow: 0 0 50px rgba(139,92,255,.14)"><div style="font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(30px, 3.4vw, 44px); line-height: 1; color: #B79CFF">ZERO</div><div style="margin-top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .06em; color: #C9D4E6">OF YOUR EVERYDAY CHAT STORED IN THE CLOUD</div></div>
 </div>
 
 <div class="jx-rv" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 96px">
@@ -1381,9 +1394,9 @@ Take back your AI — join the beta</a>
 
 <div style="display: flex; flex-wrap: wrap; gap: 20px; text-align: left">
 <div class="jx-rv" style="flex: 999 1 480px; min-width: 0; border: 1px solid rgba(34,242,225,.35); border-radius: 24px; padding: clamp(24px, 4vw, 36px); background: rgba(5,7,13,.9)">
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em; color: {{accent}}; margin-bottom: 8px">THE CLOUD'S ONLY JOB</div>
-<p style="margin: 0 0 20px; font-size: 16px; color: #C9D4E6">Updates and secure sync routing. Routing, not storage — it links your phone, the desktop app and your other devices into a private network that you control. Your data passes through; it never parks there.</p>
-<div role="img" aria-label="Phone and desktop linked through secure routing, nothing stored in the cloud" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .1em; color: {{accent}}; margin-bottom: 8px">ONLINE FEATURES AND SYNC</div>
+<p style="margin: 0 0 20px; font-size: 16px; color: #C9D4E6">Updates and secure sync routing. Routing, not storage — it links your phone, the desktop app and your other devices into a private network that you control. Everyday chat stays on-device. We handle account, waitlist and contact information as explained in our privacy policy.</p>
+<div role="img" aria-label="Phone and desktop linked through secure routing, everyday chat stays on-device" style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12px">
 <span style="border: 1px solid #262E40; background: #0A0E18; border-radius: 8px; padding: 8px 12px">PHONE · YOUR DATA</span>
 <span style="color: {{accent}}">⟷</span>
 <span style="border: 1px dashed {{accent}}; border-radius: 8px; padding: 8px 12px; color: {{accent}}; box-shadow: 0 0 18px rgba(34,242,225,.25)">SECURE ROUTE · NO STORAGE</span>
@@ -1514,7 +1527,7 @@ Take back your AI — join the beta</a>
 </div>
 <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A8B3C7; border: 1px solid #3D2E14; background: #0C0905; border-radius: 14px; padding: 14px 18px; line-height: 1.7">
 <div>STATUS · <span style="color: #FFB547">8 MODULES QUEUED</span></div>
-<div>TARGET · <span style="color: #EAF2FF">[ROADMAP DATES]</span></div>
+
 </div>
 </div>
 
@@ -1546,9 +1559,9 @@ Take back your AI — join the beta</a>
 <div style="position: relative; max-width: 1240px; margin: 0 auto; padding: 150px 24px 200px; text-align: center">
 <p style="margin: 0 0 18px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .12em; color: {{accent}}">&gt; INITIALIZE JESSI_<span class="jx-blink">▌</span></p>
 <h2 class="jx-zoom" style="margin: 0 auto 24px; max-width: 980px; font-family: Unbounded, sans-serif; font-weight: 800; font-size: clamp(38px, 6.4vw, 92px); line-height: .95; letter-spacing: -0.02em; text-transform: uppercase">The intelligence behind our robots. <span class="jx-grad">Now yours.</span></h2>
-<p style="margin: 0 auto 40px; max-width: 560px; font-size: 19px; color: #C9D4E6">No data center required. Jessi AI is in active beta — join now and she'll start learning about you.</p>
+<p style="margin: 0 auto 40px; max-width: 560px; font-size: 19px; color: #C9D4E6">No data center required. Jessi AI is in active beta — join the waitlist to hear when your spot opens.</p>
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px">
-<a href="#beta" data-jx-wl="android" class="jx-btn" style="background: {{accent}}; color: #031513; text-decoration: none; font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 14px; box-shadow: 0 0 40px rgba(34,242,225,.45)">Get the Android beta →</a>
+<a href="#beta" data-jx-wl="android" class="jx-btn" style="background: {{accent}}; color: #031513; text-decoration: none; font-weight: 700; font-size: 17px; padding: 18px 30px; border-radius: 14px; box-shadow: 0 0 40px rgba(34,242,225,.45)">Join the Android beta waitlist →</a>
 <a href="#beta" data-jx-wl="ios" class="jx-btn" style="border: 1px solid #3A2A6E; background: rgba(139,92,255,.14); color: #EAF2FF; text-decoration: none; font-weight: 600; font-size: 17px; padding: 18px 30px; border-radius: 14px">Join the iOS waitlist</a>
 </div>
 </div>
@@ -1587,12 +1600,12 @@ class Component extends DCLogic {
     this._gtries = 0;
     this._bootGlass();
     this._botCycle = setInterval(() => {
-      if (Date.now() < (this._botPause || 0)) return;
+      if (!this._sceneNear(this.hangarCanvas) || window.matchMedia('(prefers-reduced-motion: reduce)').matches || Date.now() < (this._botPause || 0)) return;
       var b0 = (this.state && this.state.bot) || 0;
       this.setState({ bot: (b0 + 1) % 5 });
     }, 5200);
     this._cycle = setInterval(() => {
-      if (Date.now() < (this._pauseUntil || 0)) return;
+      if (!this._sceneNear(this.skillCanvas) || window.matchMedia('(prefers-reduced-motion: reduce)').matches || Date.now() < (this._pauseUntil || 0)) return;
       var a = (this.state && this.state.active) || 0;
       this.setState({ active: (a + 1) % 8 });
     }, 4200);
@@ -1615,18 +1628,37 @@ class Component extends DCLogic {
     ];
     return this._sd;
   }
+  _sceneNear(canvas) {
+    if (!canvas || document.hidden) return false;
+    var r = canvas.getBoundingClientRect();
+    return r.bottom > -200 && r.top < window.innerHeight + 200 && r.width > 0;
+  }
+  _deferScene(key, canvas, ready) {
+    if (!canvas || typeof IntersectionObserver === 'undefined') return false;
+    if (this[key + 'Ready']) return false;
+    if (!this[key]) {
+      this[key] = new IntersectionObserver((entries) => {
+        if (!entries.some(e => e.isIntersecting)) return;
+        this[key].disconnect(); this[key] = null; this[key + 'Ready'] = true;
+        ready();
+      }, { rootMargin: '200px' });
+      this[key].observe(canvas);
+    }
+    return true;
+  }
   _bootSkills() {
     if (this._k) return;
     if (!window.THREE || !this.skillCanvas) {
       if (this._ktries++ < 100) this._kretry = setTimeout(() => this._bootSkills(), 100);
       return;
     }
+    if (this._deferScene('_lazySkills', this.skillCanvas, () => this._bootSkills())) return;
     try { this._setupSkills(); } catch (e) { this._k = null; }
   }
   _setupSkills() {
     var THREE = window.THREE, c = this.skillCanvas, self = this, data = this._skillData();
     var renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setClearColor(0x04050B, 1);
     var scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0x04050B, 9, 30);
@@ -1732,6 +1764,8 @@ class Component extends DCLogic {
     function shortest(a) { return Math.atan2(Math.sin(a), Math.cos(a)); }
     function frame(now) {
       if (!k.visible) { k.raf = 0; return; }
+      if (document.hidden || now - (k.lastPaint || 0) < 33) { k.raf = requestAnimationFrame(frame); return; }
+      k.lastPaint = now;
       var dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
       var an = nodes[st.active];
       st.rot += shortest(an.th - st.front - st.rot) * 0.06;
@@ -1788,6 +1822,8 @@ class Component extends DCLogic {
     }
   }
   componentWillUnmount() {
+    ['_lazySkills', '_lazyHangar', '_lazyGlass'].forEach(key => { if (this[key]) this[key].disconnect(); });
+
     clearTimeout(this._retry);
     clearTimeout(this._kretry);
     clearInterval(this._cycle);
@@ -1826,6 +1862,7 @@ class Component extends DCLogic {
     if (!s) return;
     cancelAnimationFrame(s.raf);
     if (s.ro) s.ro.disconnect();
+    if (s.io) s.io.disconnect();
     if (s.host) s.host.removeEventListener('pointermove', s.onMove);
     window.removeEventListener('scroll', s.onScroll);
     s.renderer.dispose();
@@ -1842,7 +1879,7 @@ class Component extends DCLogic {
   _setup() {
     var THREE = window.THREE, c = this.canvas, self = this;
     var renderer = new THREE.WebGLRenderer({ canvas: c, alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setClearColor(0x05070D, 1);
     var scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0x05070D, 10, 34);
@@ -1981,6 +2018,9 @@ class Component extends DCLogic {
 
     var grown = 0, last = performance.now(), time = 0;
     function frame(now) {
+      if (s.visible === false) { s.raf = 0; return; }
+      if (!reduce && (document.hidden || now - (s.lastPaint || 0) < 33)) { s.raf = requestAnimationFrame(frame); return; }
+      s.lastPaint = now;
       var dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
       var speed = self.props.learnSpeed ?? 1;
       if (grown < L) grown = Math.min(L, grown + dt * 200 * speed * (1 + grown / 350));
@@ -2007,6 +2047,13 @@ class Component extends DCLogic {
       camera.lookAt(wide ? 1.2 : 0, scrollT * 0.8, 0);
       renderer.render(scene, camera);
       if (!reduce) s.raf = requestAnimationFrame(frame);
+    }
+    if (typeof IntersectionObserver !== 'undefined') {
+      s.io = new IntersectionObserver(entries => {
+        s.visible = entries[0].isIntersecting;
+        if (s.visible && !s.raf && !reduce) { last = performance.now(); s.raf = requestAnimationFrame(frame); }
+      });
+      s.io.observe(c);
     }
     if (reduce) { grown = L; frame(performance.now()); } else s.raf = requestAnimationFrame(frame);
   }
@@ -2043,12 +2090,13 @@ class Component extends DCLogic {
       if (this._htries++ < 100) this._hretry = setTimeout(() => this._bootHangar(), 100);
       return;
     }
+    if (this._deferScene('_lazyHangar', this.hangarCanvas, () => this._bootHangar())) return;
     try { this._setupHangar(); } catch (e) { this._h = null; }
   }
   _setupHangar() {
     var THREE = window.THREE, c = this.hangarCanvas, self = this, data = this._botData(), ADD = THREE.AdditiveBlending;
     var renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setClearColor(0x04050B, 1);
     var scene = new THREE.Scene(); scene.fog = new THREE.Fog(0x04050B, 12, 34);
     var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 200); camera.position.set(0, 3.4, 13);
@@ -2203,6 +2251,8 @@ class Component extends DCLogic {
     var look = new THREE.Vector3(0, 1.6, 0), camT = new THREE.Vector3(), lookT = new THREE.Vector3(), last = performance.now(), time = 0;
     function frame(now) {
       if (!h.visible) { h.raf = 0; return; }
+      if (document.hidden || now - (h.lastPaint || 0) < 33) { h.raf = requestAnimationFrame(frame); return; }
+      h.lastPaint = now;
       var dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
       var ab = bots[st.active], ax = ab.base.position.x, az = ab.base.position.z;
       if (wide) { camT.set(ax * 0.55 + mx * 0.8, 3.4, az + 11.5); lookT.set(ax * 0.85, 1.7, az); }
@@ -2243,12 +2293,13 @@ class Component extends DCLogic {
       if (this._gtries++ < 100) this._gretry = setTimeout(() => this._bootGlass(), 100);
       return;
     }
+    if (this._deferScene('_lazyGlass', this.glassCanvas, () => this._bootGlass())) return;
     try { this._setupGlass(); } catch (e) { this._g = null; }
   }
   _setupGlass() {
     var THREE = window.THREE, c = this.glassCanvas, ADD = THREE.AdditiveBlending;
     var renderer = new THREE.WebGLRenderer({ canvas: c, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.setClearColor(0x04050B, 0);
     var scene = new THREE.Scene(); scene.fog = new THREE.Fog(0x04050B, 12, 32);
     var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200); camera.position.set(0.6, 1.4, 11);
@@ -2398,6 +2449,8 @@ class Component extends DCLogic {
     function toRoot(obj, out) { obj.getWorldPosition(out); return root.worldToLocal(out); }
     function frame(now) {
       if (!gS.visible) { gS.raf = 0; return; }
+      if (document.hidden || now - (gS.lastPaint || 0) < 33) { gS.raf = requestAnimationFrame(frame); return; }
+      gS.lastPaint = now;
       var dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
       specs.position.set(-1.4, 0.7 + Math.sin(time * 1.2) * 0.15 * idle, 0);
       specs.rotation.set(0.12 + my * 0.08 + Math.sin(time * 0.7) * 0.04 * idle, 0.55 + mx * 0.25 + Math.sin(time * 0.4) * 0.12 * idle, Math.sin(time * 0.9) * 0.03 * idle);
@@ -2502,7 +2555,7 @@ class Component extends DCLogic {
         { k: 'vault (form details)', v: 'LOCKED_LOCAL', c: '#B79CFF' },
         { k: 'personal data in training', v: 'NEVER', c: '#FF3DCB' },
         { k: 'cloud connection', v: 'ROUTING_ONLY', c: '#B79CFF' },
-        { k: 'cloud storage of your data', v: 'NONE', c: '#FF3DCB' },
+        { k: 'cloud storage of everyday chat', v: 'NONE', c: '#FF3DCB' },
         { k: 'news / weather / sources', v: 'ONLINE', c: '#FFB547' }
       ],
       assist: [
@@ -2535,7 +2588,7 @@ class Component extends DCLogic {
         { n: '05', title: 'Tasks and follow-ups', body: 'Reminders, scheduled work and timely notifications.' },
         { n: '06', title: 'Documents that become useful', body: 'Help completing forms, finding important dates and preparing downloadable results.' },
         { n: '07', title: 'Secure connections', body: 'Device-local secret storage and clear controls over connected services.' },
-        { n: '08', title: 'Cross-device continuity', body: 'Desktop and browser companions linked by secure sync routing — your own personal network, nothing stored in the cloud.' }
+        { n: '08', title: 'Cross-device continuity', body: 'Desktop and browser companions linked by secure sync routing — your own personal network, everyday chat stays on-device.' }
       ]
     };
   }

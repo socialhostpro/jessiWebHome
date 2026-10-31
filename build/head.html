@@ -37,7 +37,8 @@
       if (t.closest('[data-jx-menu] a')) setMenu(false);
     });
     window.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
-    setInterval(update, 1000);
+    document.addEventListener('DOMContentLoaded', onScroll, { once: true });
+    window.addEventListener('load', onScroll, { once: true });
 
     // Pointer effects: card tilt + spotlight, magnetic buttons, cursor glow. Fine pointers only.
     var fine = window.matchMedia('(hover: hover) and (pointer: fine)');

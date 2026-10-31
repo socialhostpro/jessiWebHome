@@ -9,9 +9,10 @@ waitlist forms. Then deploy with `railway up` from site/.
 """
 import datetime, io, json, os, re, shutil, sys, zipfile
 from urllib.parse import quote
+from optimize import optimize
 
 # Public address of the site. Change this when a custom domain is attached.
-SITE_URL = 'https://jessi-ai-home-production.up.railway.app'
+SITE_URL = 'https://yourjessi.com'
 SHARE_TITLE = 'Jessi AI — No data center needed'
 SHARE_TEXT = 'Jessi is an on-device AI assistant that thinks on your phone, not in a data center.'
 CONTACT_EMAIL = 'privacy@quantumforgerobotics.com'
@@ -69,7 +70,7 @@ def meta_variant(html, slug, d):
 def add_sections_jsonld(html):
     """Lists the home page's sections for search engines (helps sitelinks)."""
     items = [{'@type': 'SiteNavigationElement', 'position': i + 1, 'name': d['title'].split(' — ')[0].split(' | ')[0],
-              'description': d['desc'], 'url': '%s/%s' % (SITE_URL, slug)}
+              'description': d['desc'], 'url': '%s/#%s' % (SITE_URL, d['section'])}
              for i, (slug, d) in enumerate((s, d) for s, d in SHARES.items() if 'section' in d)]
     block = ('  <script type="application/ld+json">\n  %s\n  </script>\n'
              % json.dumps({'@context': 'https://schema.org', '@type': 'ItemList', 'name': 'Jessi AI sections',
@@ -104,6 +105,40 @@ def main(zip_path):
 
     html = io.TextIOWrapper(z.open(pages[0]), encoding='utf-8').read()
 
+    # Public copy corrections live here so future canvas rebuilds preserve them.
+    html = re.sub(r'<span>WATER/CHAT.*?</span></span>\s*', '', html)
+    html = re.sub(r'<span>ENERGY/CHAT.*?</span></span>\s*', '', html)
+    html = html.replace('Supported glasses models: [MODEL LIST]. ', '')
+    html = re.sub(r'<div>TARGET.*?\[ROADMAP DATES\].*?</div>', '', html)
+    replacements = {
+        'Available now': 'Request an invitation',
+        'Get the Android beta': 'Join the Android beta waitlist',
+        'Get the beta &amp; call Jessi': 'Join the beta waitlist',
+        "in active beta - join now and she'll start learning about you.": 'in active beta - join the waitlist to hear when your spot opens.',
+        'OF YOUR DATA STORED IN THE CLOUD': 'OF YOUR EVERYDAY CHAT STORED IN THE CLOUD',
+        'cloud storage of your data': 'cloud storage of everyday chat',
+        'nothing stored in the cloud': 'everyday chat stays on-device',
+    }
+    for old, new in replacements.items():
+        html = html.replace(old, new)
+
+    html = html.replace("in active beta — join now and she'll start learning about you.",
+                        'in active beta — join the waitlist to hear when your spot opens.')
+    html = html.replace('Your data stays on your device.', 'Everyday chat stays on your device.')
+    html = html.replace("THE CLOUD'S ONLY JOB", 'ONLINE FEATURES AND SYNC')
+    html = html.replace('Your data passes through; it never parks there.',
+                        'Everyday chat stays on-device. We handle account, waitlist and contact information as explained in our privacy policy.')
+    # Cap expensive WebGL rendering at 30fps and pause work in background tabs.
+    html = html.replace('Math.min(window.devicePixelRatio || 1, 2)',
+                        'Math.min(window.devicePixelRatio || 1, 1.5)')
+    for state in ('k', 'h', 'gS'):
+        original = 'if (!%s.visible) { %s.raf = 0; return; }' % (state, state)
+        gate = ('\n      if (document.hidden || now - (%s.lastPaint || 0) < 33) '
+                '{ %s.raf = requestAnimationFrame(frame); return; }\n      %s.lastPaint = now;' % (state, state, state))
+        html = html.replace(original, original + gate)
+    hero = 'function frame(now) {\n      var dt = Math.min(0.05, (now - last) / 1000);'
+    html = html.replace(hero, 'function frame(now) {\n      if (!reduce && (document.hidden || now - (s.lastPaint || 0) < 33)) { s.raf = requestAnimationFrame(frame); return; }\n      s.lastPaint = now;\n      var dt = Math.min(0.05, (now - last) / 1000);')
+
     # 1. SEO tags (replacing the export's title), viewport, behaviour scripts.
     head = '<meta charset="utf-8">'
     assert html.count(head) == 1, 'charset meta not found'
@@ -129,7 +164,7 @@ def main(zip_path):
 
     # 3. Styles: append to the end of the first <helmet> style block.
     i = html.index('</style>', html.index('<helmet>'))
-    css = ''.join(read(n) for n in ('enhance.css', 'share.css', 'promise.css', 'waitlist.css', 'origin.css'))
+    css = ''.join(read(n) for n in ('enhance.css', 'share.css', 'promise.css', 'waitlist.css', 'origin.css', 'performance.css'))
     html = html[:i] + '\n' + css + html[i:]
 
     # 4. Links: the privacy-promise button opens the modal (falling back to /privacy),
@@ -164,6 +199,7 @@ def main(zip_path):
     if GOOGLE_SITE_VERIFICATION:
         html = html.replace(head, head + '\n  <meta name="google-site-verification" content="%s">' % GOOGLE_SITE_VERIFICATION, 1)
     html = add_sections_jsonld(html)
+    html = optimize(html)
 
     # Static files: icons, share images, manifest, robots and sitemap.
     pub = os.path.join(HERE, 'public')
@@ -176,8 +212,8 @@ def main(zip_path):
     entries = [(url, 'weekly', '1.0')] + [(SITE_URL + '/' + p, 'monthly', '0.5') for p in ('privacy', 'terms', 'contact')]
     with open(os.path.join(SITE, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-                + ''.join('  <url><loc>%s</loc><lastmod>%s</lastmod><changefreq>%s</changefreq><priority>%s</priority></url>\n'
-                          % (loc, today, freq, pri) for loc, freq, pri in entries)
+                + ''.join('  <url><loc>%s</loc><changefreq>%s</changefreq><priority>%s</priority></url>\n'
+                          % (loc, freq, pri) for loc, freq, pri in entries)
                 + '</urlset>\n')
     build_pages()
     shutil.copy(os.path.join(HERE, 'server.js'), os.path.join(SITE, 'server.js'))
