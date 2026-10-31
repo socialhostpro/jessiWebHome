@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jessi-ai-home-production.up.railway.app/sitemap.xml
+Sitemap: https://yourjessi.com/sitemap.xml

@@ -1,0 +1,14 @@
+/* Keep content immediately visible; retain the static visual design. */
+#top>div[style*="z-index: 2"]>div>*,
+#top>div[style*="z-index: 2"]>div>:nth-child(6)>*{animation:none!important}
+/* Background-position, filters and animated large glows repaint continuously. */
+.jx-grad,.jx-floor,.jx-scan,.jx-hdr::after,.jx-cta::after,
+section div[aria-hidden][style*="filter: blur(9"],
+section div[aria-hidden][style*="filter: blur(100px)"]{animation:none!important}
+@supports (animation-timeline:view()){
+section:not(#top) :is(h2,p,article,.jx-tilt,li,a.jx-btn){animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.jx-tilt:hover{transform:none!important}
+}

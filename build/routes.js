@@ -17,7 +17,7 @@
       var el = document.getElementById(id);
       if (!el) return false;
       lockUntil = Date.now() + (smooth ? 1200 : 400);
-      el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+      el.scrollIntoView({ behavior: smooth && !window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto', block: 'start' });
       current = id;
       return true;
     }
@@ -63,7 +63,7 @@
       if (!a || a.target) return;
       var href = a.getAttribute('href');
       var s = href.replace(/^\/+|\/+$/g, '');
-      if (href === '/') { e.preventDefault(); lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: 'smooth' }); current = ''; setPath('/', true); return; }
+      if (href === '/') { e.preventDefault(); lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); current = ''; setPath('/', true); return; }
       if (href.charAt(0) !== '/' || !ROUTES[s]) return;
       e.preventDefault();
       if (scrollToId(ROUTES[s], true)) setPath('/' + s, true);
@@ -73,7 +73,7 @@
     window.addEventListener('popstate', function () {
       var id = ROUTES[slug()];
       if (id) scrollToId(id, true);
-      else if (!slug()) { lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: 'smooth' }); current = ''; }
+      else if (!slug()) { lockUntil = Date.now() + 1200; window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); current = ''; }
     });
 
     // Scrolling updates the address bar to the section in view (replace, so history isn't flooded).
