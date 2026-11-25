@@ -262,6 +262,21 @@ http.createServer((req, res) => {
     return api(req, res).catch(e => { console.error(urlPath, e); if (!res.headersSent) { res.writeHead(500); res.end(); } });
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.writeHead(405, baseHeaders({ Allow: 'GET, HEAD' })); return res.end(); }
+  // iOS universal links (Meta glasses callback): Apple needs exactly 200 + application/json, no redirect.
+  if (urlPath === '/.well-known/apple-app-site-association') {
+    const body = fs.readFileSync(path.join(ROOT, '.well-known', 'apple-app-site-association'));
+    res.writeHead(200, baseHeaders({ 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600', 'Content-Length': body.length }));
+    return res.end(req.method === 'HEAD' ? undefined : body);
+  }
+  // Universal-link fallback when the app isn't installed (the link opens in the browser instead).
+  if (urlPath === '/meta' || urlPath.startsWith('/meta/')) {
+    const body = Buffer.from('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<meta name="robots" content="noindex"><title>Open in Jessi</title></head><body style="font-family:system-ui,sans-serif;background:#05070D;color:#EAF2FF;' +
+      'display:flex;min-height:100vh;margin:0;align-items:center;justify-content:center;text-align:center;padding:24px;box-sizing:border-box">' +
+      '<main><h1>Open in Jessi</h1><p>Open this link on your iPhone with Jessi installed.</p><p><a href="/" style="color:#22F2E1">Go to yourjessi.com</a></p></main></body></html>');
+    res.writeHead(200, baseHeaders({ 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache', 'Content-Length': body.length }));
+    return res.end(req.method === 'HEAD' ? undefined : body);
+  }
   if (urlPath === '/index.html') { res.writeHead(301, { Location: '/' }); return res.end(); }
   const slug = urlPath.replace(/^\/+|\/+$/g, '');
   if (urlPath.length > 1 && urlPath.endsWith('/') && (HOME_ROUTES.has(slug) || resolve('/' + slug))) {

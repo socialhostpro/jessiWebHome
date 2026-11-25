@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["U6Z55PZ967.com.yourjessi.app"],
+        "components": [
+          { "/": "/meta", "comment": "Meta Wearables callback" },
+          { "/": "/meta/*", "comment": "Meta Wearables callback (https://yourjessi.com/meta/wearables)" }
+        ],
+        "appID": "U6Z55PZ967.com.yourjessi.app",
+        "paths": ["/meta", "/meta/*"]
+      }
+    ]
+  }
+}
